@@ -1,0 +1,8 @@
+@import "logistic-defaults";
+@import "addons";
+@import "logistic";
+
+.logistic {
+  @include addons;
+  @include logistic;
+}

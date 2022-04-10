@@ -1,0 +1,17 @@
+@import "../helium/helium";
+
+@mixin logistic {
+  @include helium;
+
+  .v-grid-row.deleted-entity > td {
+    text-decoration: line-through;
+    color: #6b0404;
+  }
+
+  .v-table {
+    .deleted-entity {
+      text-decoration: line-through;
+      color: #6b0404;
+    }
+  }
+}
