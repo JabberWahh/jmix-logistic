@@ -27,6 +27,10 @@
                 modal="true"
                 forceDialog="true"/>
     <layout spacing="true" expand="editActions">
+        <groupBox orientation="horizontal" id="lockedGroup" width="Auto"
+                  expand="lockedFragment">
+            <fragment screen="LockedEntity" id="lockedFragment"/>
+        </groupBox>
         <form id="form" dataContainer="clientDc">
             <column width="350px">
                 <textField id="nameField" property="name"/>
