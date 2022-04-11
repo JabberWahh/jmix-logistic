@@ -5,8 +5,11 @@
     <data>
         <instance id="clientDc"
                   class="org.lightspeedsnail.entity.Client">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="clientContact" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
+            <collection id="clientContactDc" property="clientContact"/>
         </instance>
     </data>
     <facets>
@@ -22,26 +25,45 @@
                 caption="msg:///actions.Close"
                 icon="EDITOR_CANCEL"/>
     </actions>
-    <dialogMode height="AUTO"
-                width="AUTO"
-                modal="true"
-                forceDialog="true"/>
-    <layout spacing="true" expand="editActions">
-        <groupBox orientation="horizontal" id="lockedGroup" width="Auto"
-                  expand="lockedFragment">
-            <fragment screen="LockedEntity" id="lockedFragment"/>
-        </groupBox>
-        <form id="form" dataContainer="clientDc">
-            <column width="350px">
-                <textField id="nameField" property="name"/>
-                <textArea id="commentsField" property="comments" rows="5"/>
-                <textField id="registrationDateField" property="registrationDate"/>
-                <textField id="numberField" property="number"/>
-            </column>
-        </form>
-        <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-            <button id="closeBtn" action="windowClose"/>
-        </hbox>
+    <layout spacing="true" width="100%">
+        <vbox spacing="true" width="100%">
+            <groupBox orientation="horizontal" id="lockedGroup" width="Auto"
+                      expand="lockedFragment">
+                <fragment screen="LockedEntity" id="lockedFragment"/>
+            </groupBox>
+            <hbox id="editActions" spacing="true">
+                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                <button id="closeBtn" action="windowClose"/>
+            </hbox>
+            <form id="form" dataContainer="clientDc">
+                <column flex="1.0">
+                    <textField id="numberField" property="number"/>
+                    <textField id="nameField" property="name"/>
+                </column>
+                <column flex="1.0">
+                    <textField id="registrationDateField" property="registrationDate"/>
+                    <textArea id="commentsField" property="comments" rows="5" height="AUTO"/>
+                </column>
+            </form>
+            <dataGrid id="clientConnectionsTable" height="AUTO" width="100%" dataContainer="clientContactDc"
+                      editorEnabled="true" caption="msg://clientConnectionsTable1.caption">
+                <actions>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <buttonsPanel alwaysVisible="true">
+                    <button id="clientContactTableAddBtn" caption="msg://clientConnectionsTableAddBtn.caption"
+                            icon="PLUS" stylename="primary"/>
+                    <button id="clientContactTableEditBtn" action="clientConnectionsTable.edit"/>
+                    <button id="clientConnectionsTableRemoveBtn" action="clientConnectionsTable.remove"
+                            stylename="danger"/>
+                </buttonsPanel>
+                <columns>
+                    <column id="typeOfContact" property="typeOfContact"/>
+                    <column id="info" property="info"/>
+                    <column id="primaryType" property="primaryType"/>
+                </columns>
+            </dataGrid>
+        </vbox>
     </layout>
 </window>

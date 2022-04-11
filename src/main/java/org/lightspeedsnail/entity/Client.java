@@ -6,8 +6,8 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @JmixEntity
@@ -37,6 +37,17 @@ public class Client implements DocumentsAndReferences, Numbering {
     @Column(name = "DELETED", nullable = false, columnDefinition = "boolean default false")
     @NotNull
     private Boolean deleted = false;
+
+    @OneToMany(mappedBy = "client")
+    private Set<ClientContact> clientContact;
+
+    public Set<ClientContact> getClientContact() {
+        return clientContact;
+    }
+
+    public void setClientContact(Set<ClientContact> clientConnection) {
+        this.clientContact = clientConnection;
+    }
 
     public LocalDateTime getRegistrationDate() {
         return registrationDate;

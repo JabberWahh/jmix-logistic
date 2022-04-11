@@ -3,16 +3,13 @@ package org.lightspeedsnail.screen.client;
 import io.jmix.ui.Actions;
 import io.jmix.ui.component.Button;
 import io.jmix.ui.component.DataGrid;
-import io.jmix.ui.component.GroupTable;
-import io.jmix.ui.component.data.GroupInfo;
 import io.jmix.ui.screen.*;
-import org.eclipse.persistence.sessions.interceptors.CacheKeyInterceptor;
 import org.lightspeedsnail.entity.Client;
+import org.lightspeedsnail.entity.ClientContact;
 import org.lightspeedsnail.service.MarkToDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Nullable;
-import java.util.function.Function;
+import java.util.Set;
 
 @UiController("Client.browse")
 @UiDescriptor("client-browse.xml")
@@ -30,7 +27,7 @@ public class ClientBrowse extends StandardLookup<Client> {
     public void onInit(InitEvent event) {
 
         clientsTable.addRowStyleProvider(client -> {
-            if(client.getDeleted()){
+            if (client.getDeleted()) {
                 return "deleted-entity";
             }
             return null;
@@ -40,5 +37,21 @@ public class ClientBrowse extends StandardLookup<Client> {
         ss.setTarget(clientsTable);
         deleteBtn.setAction(ss);
 
+        //Not necessary
+//        DataGrid.TextRenderer clientsTableConnectionRenderer = getApplicationContext().getBean(DataGrid.TextRenderer.class);
+//        clientsTable.getColumn("info").setRenderer(clientsTableConnectionRenderer);
+
+
+    }
+
+    @Install(to = "clientsTable.info", subject = "columnGenerator")
+    private String info(DataGrid.ColumnGeneratorEvent<Client> columnGeneratorEvent) {
+        Set<ClientContact> connection = columnGeneratorEvent.getItem().getClientContact();
+        String info = connection.stream()
+                .filter(clientConnection -> clientConnection.getPrimaryType())
+                .findFirst()
+                .map(clientConnection -> clientConnection.getInfo())
+                .orElse("");
+        return info;
     }
 }
