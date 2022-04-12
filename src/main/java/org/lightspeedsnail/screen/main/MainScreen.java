@@ -12,6 +12,7 @@ import io.jmix.ui.screen.Subscribe;
 import io.jmix.ui.screen.UiController;
 import io.jmix.ui.screen.UiControllerUtils;
 import io.jmix.ui.screen.UiDescriptor;
+import org.lightspeedsnail.service.USZipLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @UiController("MainScreen")
@@ -28,11 +29,18 @@ public class MainScreen extends Screen implements Window.HasWorkArea {
     private Drawer drawer;
     @Autowired
     private Button collapseDrawerButton;
+    @Autowired
+    private USZipLoader uSZipLoader;
 
 
     @Override
     public AppWorkArea getWorkArea() {
         return workArea;
+    }
+
+    @Subscribe
+    public void onInit(InitEvent event) {
+        uSZipLoader.loadFromInnerCSV();
     }
 
     @Subscribe("collapseDrawerButton")

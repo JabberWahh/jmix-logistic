@@ -3,12 +3,9 @@ package org.lightspeedsnail.service;
 import io.jmix.core.DataManager;
 import io.jmix.ui.Dialogs;
 import io.jmix.ui.action.DialogAction;
-import io.jmix.ui.action.list.RemoveAction;
 import org.lightspeedsnail.entity.DocumentsAndReferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Set;
 
 @Component
 public class Deletion {
