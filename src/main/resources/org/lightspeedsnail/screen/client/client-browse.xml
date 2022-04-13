@@ -49,7 +49,7 @@
                 <column property="registrationDate" id="registrationDate"/>
                 <column property="number" id="number"/>
                 <column id="info" caption="msg://info.caption" editable="false">
-                    <textRenderer nullRepresentation="null"/>
+                    <textRenderer nullRepresentation="n/a"/>
                 </column>
             </columns>
             <simplePagination/>

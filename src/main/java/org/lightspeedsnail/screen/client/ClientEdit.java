@@ -1,14 +1,20 @@
 package org.lightspeedsnail.screen.client;
 
 import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.ui.Dialogs;
 import io.jmix.ui.Fragments;
+import io.jmix.ui.app.inputdialog.DialogActions;
+import io.jmix.ui.app.inputdialog.InputDialog;
+import io.jmix.ui.app.inputdialog.InputParameter;
 import io.jmix.ui.component.Button;
+import io.jmix.ui.component.Component;
 import io.jmix.ui.component.DataGrid;
 import io.jmix.ui.component.GroupBoxLayout;
 import io.jmix.ui.model.CollectionPropertyContainer;
 import io.jmix.ui.model.DataContext;
 import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
+import org.lightspeedsnail.entity.Address;
 import org.lightspeedsnail.entity.Client;
 import org.lightspeedsnail.entity.ClientContact;
 import org.lightspeedsnail.entity.User;
@@ -101,6 +107,11 @@ public class ClientEdit extends StandardEditor<Client> {
                 }
             }
         }
+    }
+
+    @Install(to = "addressesTable.info", subject = "columnGenerator")
+    private String addressesTableInfoColumnGenerator(DataGrid.ColumnGeneratorEvent<Address> columnGeneratorEvent) {
+        return columnGeneratorEvent.getItem().getInstanceName();
     }
 
 }

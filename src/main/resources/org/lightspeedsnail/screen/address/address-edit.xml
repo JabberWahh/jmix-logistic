@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://addressEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="addressDc"
+                  class="org.lightspeedsnail.entity.Address">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose"
+                caption="msg:///actions.SaveClose"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout spacing="true">
+        <form id="addressForm" dataContainer="addressDc">
+            <column width="350px">
+                <textField id="zipField" property="zip" datatype="int" caption="zip"/>
+                <hbox spacing="true" width="100%">
+                    <suggestionField id="stateField" property="state" minSearchStringLength="2" description="state"
+                                     caption="state"/>
+                    <label id="stateIdLabel" align="BOTTOM_LEFT" value="n/a" htmlEnabled="true"/>
+                </hbox>
+                <suggestionField id="countyField" property="county" minSearchStringLength="3" caption="county"/>
+                <suggestionField id="cityField" property="city" minSearchStringLength="3" caption="city"/>
+                <textField id="address1Field" property="address1" caption="address1"/>
+                <textField id="address2Field" property="address2" caption="address2"/>
+                <hbox id="editActions" spacing="true" margin="true">
+                    <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                    <button id="closeBtn" action="windowClose"/>
+                </hbox>
+            </column>
+        </form>
+    </layout>
+</window>

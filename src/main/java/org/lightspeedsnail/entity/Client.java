@@ -7,6 +7,7 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -18,6 +19,9 @@ public class Client implements DocumentsAndReferences, Numbering {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @OneToMany(mappedBy = "client")
+    private List<Address> address;
 
     @InstanceName
     @Column(name = "NAME", nullable = false)
@@ -40,6 +44,14 @@ public class Client implements DocumentsAndReferences, Numbering {
 
     @OneToMany(mappedBy = "client")
     private Set<ClientContact> clientContact;
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> fdress) {
+        this.address = fdress;
+    }
 
     public Set<ClientContact> getClientContact() {
         return clientContact;

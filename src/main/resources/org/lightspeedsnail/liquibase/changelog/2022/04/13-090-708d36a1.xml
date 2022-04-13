@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="jmix-logistic">
+        <createTable tableName="ADDRESS">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ADDRESS"/>
+            </column>
+            <column name="ZIP" type="INT"/>
+            <column name="STATE" type="VARCHAR(255)"/>
+            <column name="CITY" type="VARCHAR(255)"/>
+            <column name="ADRESS1" type="VARCHAR(255)"/>
+            <column name="ADRESS2" type="VARCHAR(255)"/>
+            <column name="CLIENT_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="jmix-logistic">
+        <createIndex indexName="IDX_ADDRESS_CLIENT_ID" tableName="ADDRESS">
+            <column name="CLIENT_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="ADDRESS"
+                                 constraintName="FK_ADDRESS_ON_CLIENT" referencedColumnNames="ID"
+                                 referencedTableName="CLIENT"/>
+    </changeSet>
+</databaseChangeLog>

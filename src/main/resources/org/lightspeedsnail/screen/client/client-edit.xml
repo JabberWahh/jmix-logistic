@@ -7,9 +7,12 @@
                   class="org.lightspeedsnail.entity.Client">
             <fetchPlan extends="_base">
                 <property name="clientContact" fetchPlan="_base"/>
+                <property name="address" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
             <collection id="clientContactDc" property="clientContact"/>
+            <collection id="addressesDc" property="address">
+            </collection>
         </instance>
     </data>
     <facets>
@@ -26,7 +29,7 @@
                 icon="EDITOR_CANCEL"/>
     </actions>
     <layout spacing="true" width="100%">
-        <vbox spacing="true" width="100%">
+        <vbox spacing="true" width="100%" >
             <groupBox orientation="horizontal" id="lockedGroup" width="Auto"
                       expand="lockedFragment">
                 <fragment screen="LockedEntity" id="lockedFragment"/>
@@ -45,7 +48,7 @@
                     <textArea id="commentsField" property="comments" rows="5" height="AUTO"/>
                 </column>
             </form>
-            <dataGrid id="clientConnectionsTable" height="AUTO" width="100%" dataContainer="clientContactDc"
+            <dataGrid id="clientConnectionsTable" height="200px" width="100%" dataContainer="clientContactDc"
                       editorEnabled="true" caption="msg://clientConnectionsTable1.caption">
                 <actions>
                     <action id="edit" type="edit"/>
@@ -62,6 +65,28 @@
                     <column id="typeOfContact" property="typeOfContact"/>
                     <column id="info" property="info"/>
                     <column id="primaryType" property="primaryType"/>
+                </columns>
+            </dataGrid>
+            <dataGrid id="addressesTable" height="200px" width="100%" dataContainer="addressesDc">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="remove" type="remove"/>
+                    <action id="edit" type="edit"/>
+                </actions>
+                <buttonsPanel>
+                    <button id="addressesTableCreateBtn" action="addressesTable.create"/>
+                    <button id="addressesTableRemoveBtn" action="addressesTable.remove"/>
+                    <button id="addressesTableEditBtn" action="addressesTable.edit"/>
+                </buttonsPanel>
+                <columns>
+<!--                    <column id="zip" property="zip"/>-->
+<!--                    <column id="state" property="state"/>-->
+<!--                    <column id="city" property="city"/>-->
+<!--                    <column id="address1" property="address1"/>-->
+<!--                    <column id="address2" property="address2"/>-->
+                    <column id="info" editable="false" caption="msg://info1.caption">
+                        <textRenderer nullRepresentation="n/a"/>
+                    </column>
                 </columns>
             </dataGrid>
         </vbox>
