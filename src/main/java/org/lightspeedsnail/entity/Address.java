@@ -6,6 +6,7 @@ import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import java.util.Locale;
 import java.util.UUID;
 
 @JmixEntity
@@ -108,6 +109,13 @@ public class Address {
     @InstanceName
     @DependsOnProperties({"zip", "state", "county", "city", "address1", "address2"})
     public String getInstanceName() {
-        return String.format("%s, %s, %s, %s, %s, %s", zip, state, county, city, address1, address2);
+        String addr = (zip == 0 ? "" : zip.toString() + ", ") +
+                (state == null || state.isEmpty() ? "" : state + ", ") +
+                (county == null || county.isEmpty() ? "" : county + ", ") +
+                (city == null || city.isEmpty() ? "" : city + ", ") +
+                (address1 == null || address1.isEmpty() ? "" : address1 + ", ") +
+                (address2 == null || address2.isEmpty() ? "" : address2 + ", ");
+        addr = addr.substring(0, addr.length() - 2);
+        return addr;
     }
 }

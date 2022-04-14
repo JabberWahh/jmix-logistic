@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://clientBrowse.caption"
-        focusComponent="clientsTable">
+        caption="msg://productBrowse.caption"
+        focusComponent="productsTable">
     <data readOnly="true">
-        <collection id="clientsDc"
-                    class="org.lightspeedsnail.entity.Client">
-            <fetchPlan extends="_base">
-            </fetchPlan>
-            <loader id="clientsDl">
+        <collection id="productsDc"
+                    class="org.lightspeedsnail.entity.Product">
+            <fetchPlan extends="_base"/>
+            <loader id="productsDl">
                 <query>
-                    <![CDATA[select e from Client e order by e.name]]>
+                    <![CDATA[select e from Product e]]>
                 </query>
             </loader>
         </collection>
@@ -31,33 +30,30 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="clientsTable" spacing="true">
+    <layout expand="productsTable" spacing="true">
         <filter id="filter"
-                dataLoader="clientsDl">
+                dataLoader="productsDl">
             <properties include=".*"/>
         </filter>
-        <dataGrid id="clientsTable"
+        <dataGrid id="productsTable"
                   width="100%"
-                  dataContainer="clientsDc">
+                  dataContainer="productsDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
+                <action id="markToDelete" type="markToDelete"/>
             </actions>
             <columns>
                 <column property="name" id="name"/>
-                <column property="comments" id="comments"/>
-                <column property="registrationDate" id="registrationDate"/>
+                <column property="weight" id="weight"/>
                 <column property="number" id="number"/>
-                <column id="info" caption="msg://info.caption" editable="false">
-                    <textRenderer nullRepresentation="n/a"/>
-                </column>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="clientsTable.create"/>
-                <button id="editBtn" action="clientsTable.edit"/>
-                <button id="deleteBtn" icon="REMOVE_ACTION" stylename="danger"/>
+                <button id="createBtn" action="productsTable.create"/>
+                <button id="editBtn" action="productsTable.edit"/>
+                <button id="productsTableMarkToDeleteBtn" icon="REMOVE_ACTION" stylename="danger" action="productsTable.markToDelete"/>
             </buttonsPanel>
         </dataGrid>
         <hbox id="lookupActions" spacing="true" visible="false">

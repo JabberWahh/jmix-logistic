@@ -5,6 +5,8 @@
         <item screen="User.browse" caption="msg://org.lightspeedsnail.screen.user/UserBrowse.caption"/>
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
         <item screen="Client.browse" caption="msg://org.lightspeedsnail.screen.client/clientBrowse.menu"/>
+        <item screen="Shipment.browse" caption="msg://org.lightspeedsnail.screen.shipment/shipmentBrowse.menu"/>
+        <item screen="Product.browse" caption="msg://org.lightspeedsnail.screen.product/productBrowse.menu"/>
     </menu>
 
 </menu-config>
