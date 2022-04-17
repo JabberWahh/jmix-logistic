@@ -49,8 +49,8 @@ public class Client implements DocumentsAndReferences, Numbering {
         return address;
     }
 
-    public void setAddress(List<Address> fdress) {
-        this.address = fdress;
+    public void setAddress(List<Address> address) {
+        this.address = address;
     }
 
     public Set<ClientContact> getClientContact() {

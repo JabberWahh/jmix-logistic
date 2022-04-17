@@ -40,7 +40,7 @@ public class USZipLoader {
     public void loadFromInnerCSV() {
 
         systemAuthenticator.withSystem(() -> {
-            //Todo make with count
+            //Todo make admin panel
             Optional<USZip> zips = dataManager.load(USZip.class).all().optional();
             if (!zips.isPresent()) {
 

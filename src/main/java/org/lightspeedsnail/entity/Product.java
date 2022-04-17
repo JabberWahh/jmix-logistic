@@ -74,4 +74,8 @@ public class Product implements DocumentsAndReferences, Numbering {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return  name;
+    }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="jmix-logistic">
+        <createTable tableName="ORDER_DETAIL">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ORDER_DETAIL"/>
+            </column>
+            <column name="PRODUCT_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="QUANTITY" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORDER_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="jmix-logistic">
+        <createIndex indexName="IDX_ORDERDETAIL_ORDER_ID" tableName="ORDER_DETAIL">
+            <column name="ORDER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ORDER_ID" baseTableName="ORDER_DETAIL"
+                                 constraintName="FK_ORDER_DETAIL_ON_ORDER" referencedColumnNames="ID"
+                                 referencedTableName="ORDER_"/>
+    </changeSet>
+    <changeSet id="3" author="jmix-logistic">
+        <createIndex indexName="IDX_ORDERDETAIL_PRODUCT_ID" tableName="ORDER_DETAIL">
+            <column name="PRODUCT_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="PRODUCT_ID" baseTableName="ORDER_DETAIL"
+                                 constraintName="FK_ORDER_DETAIL_ON_PRODUCT" referencedColumnNames="ID"
+                                 referencedTableName="PRODUCT"/>
+    </changeSet>
+</databaseChangeLog>

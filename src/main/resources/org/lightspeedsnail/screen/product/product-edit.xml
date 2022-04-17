@@ -26,17 +26,23 @@
                 width="AUTO"
                 modal="true"
                 forceDialog="true"/>
-    <layout spacing="true" expand="editActions">
-        <form id="form" dataContainer="productDc">
-            <column width="350px">
-                <textField id="nameField" property="name"/>
-                <textField id="weightField" property="weight"/>
-                <textField id="numberField" property="number"/>
-            </column>
-        </form>
-        <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-            <button id="closeBtn" action="windowClose"/>
-        </hbox>
+    <layout spacing="true" >
+        <vbox spacing="true">
+            <groupBox orientation="horizontal" id="lockedGroup" width="Auto"
+                      expand="lockedFragment">
+                <fragment screen="LockedEntity" id="lockedFragment"/>
+            </groupBox>
+            <form id="form" dataContainer="productDc">
+                <column width="350px">
+                    <textField id="nameField" property="name"/>
+                    <textField id="weightField" property="weight"/>
+                    <textField id="numberField" property="number"/>
+                </column>
+            </form>
+            <hbox id="editActions" spacing="true">
+                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                <button id="closeBtn" action="windowClose"/>
+            </hbox>
+        </vbox>
     </layout>
 </window>

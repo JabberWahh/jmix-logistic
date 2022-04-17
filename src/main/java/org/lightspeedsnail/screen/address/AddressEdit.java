@@ -64,7 +64,6 @@ public class AddressEdit extends StandardEditor<Address> {
 
     @Subscribe
     public void onInit(InitEvent event) {
-        //Todo fix xml of layout
         renewStateLabel();
     }
 

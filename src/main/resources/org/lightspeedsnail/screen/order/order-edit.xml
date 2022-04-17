@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://orderEdit.caption"
+        focusComponent="closeBtn" icon="CART_ARROW_DOWN">
+    <data>
+        <instance id="orderDc"
+                  class="org.lightspeedsnail.entity.Order">
+            <fetchPlan extends="_base">
+                <property fetch="AUTO" fetchPlan="_base" name="client"/>
+                <property name="order_detail" fetchPlan="_base">
+                    <property name="product" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <collection id="order_detailDc" property="order_detail"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+        <action id="set_address"/>
+    </actions>
+    <layout spacing="true">
+        <vbox spacing="true" width="AUTO" expand="orderForm">
+            <form id="orderForm" dataContainer="orderDc" captionPosition="TOP">
+                <column width="100%" flex="1.0" childrenCaptionAlignment="LEFT">
+                    <hbox id="editActions" spacing="true">
+                        <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                        <button id="closeBtn" action="windowClose"/>
+                    </hbox>
+                    <gridLayout spacing="true">
+                        <columns count="2"/>
+                        <rows>
+                            <row>
+                                <textField id="numberField" property="number" dataContainer="orderDc"/>
+                                <dateField id="createdField" property="created" dataContainer="orderDc"/>
+                            </row>
+                            <row>
+                                <entityPicker id="clientField" property="client" dataContainer="orderDc">
+                                    <actions>
+                                        <action id="entityLookup" type="entity_lookup"/>
+                                        <action id="entityClear" type="entity_clear"/>
+                                    </actions>
+                                </entityPicker>
+                                <comboBox id="statusField" property="status" dataContainer="orderDc"/>
+                            </row>
+                            <row>
+                                <textField id="distanceField" property="distance" dataContainer="orderDc"/>
+                            </row>
+                            <row>
+                                <label align="BOTTOM_RIGHT" dataContainer="orderDc" property="address" width="100%"/>
+                                <button id="setAddressBtn" align="BOTTOM_LEFT" action="set_address"
+                                        caption="msg://button.caption"/>
+                            </row>
+                        </rows>
+                    </gridLayout>
+                    <groupBox orientation="vertical" spacing="true" width="AUTO"
+                              height="100%" caption="products" expand="orderDetailsTable">
+                        <dataGrid id="orderDetailsTable" height="AUTO" width="800px" dataContainer="order_detailDc"
+                                  editorEnabled="true">
+                            <actions>
+                                <action id="remove" type="remove"/>
+                            </actions>
+                            <buttonsPanel>
+                                <button id="orderDetailTableAddBtn" caption="msg://clientConnectionsTableAddBtn.caption"
+                                        icon="PLUS" stylename="primary"/>
+                                <button id="orderDetailsTableRemoveBtn" action="orderDetailsTable.remove"
+                                        stylename="danger"/>
+                            </buttonsPanel>
+                            <columns>
+                                <column id="product" property="product" expandRatio="8"/>
+                                <column id="quantity" property="quantity" expandRatio="1"/>
+                                <column id="price" property="price" expandRatio="1"/>
+                                <column id="sum" property="sum" editable="false" expandRatio="1"/>
+                                <!--                    <column id="order" property="order"/>-->
+                            </columns>
+                        </dataGrid>
+                    </groupBox>
+                </column>
+            </form>
+        </vbox>
+    </layout>
+</window>

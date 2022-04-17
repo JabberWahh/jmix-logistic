@@ -51,13 +51,11 @@
             <dataGrid id="clientConnectionsTable" height="200px" width="100%" dataContainer="clientContactDc"
                       editorEnabled="true" caption="msg://clientConnectionsTable1.caption">
                 <actions>
-                    <action id="edit" type="edit"/>
                     <action id="remove" type="remove"/>
                 </actions>
                 <buttonsPanel alwaysVisible="true">
                     <button id="clientContactTableAddBtn" caption="msg://clientConnectionsTableAddBtn.caption"
                             icon="PLUS" stylename="primary"/>
-                    <button id="clientContactTableEditBtn" action="clientConnectionsTable.edit"/>
                     <button id="clientConnectionsTableRemoveBtn" action="clientConnectionsTable.remove"
                             stylename="danger"/>
                 </buttonsPanel>

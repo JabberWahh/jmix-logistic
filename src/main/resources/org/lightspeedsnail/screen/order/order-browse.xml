@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://productBrowse.caption"
-        focusComponent="productsTable">
+        caption="msg://orderBrowse.caption"
+        focusComponent="ordersTable">
     <data readOnly="true">
-        <collection id="productsDc"
-                    class="org.lightspeedsnail.entity.Product">
-            <fetchPlan extends="_base"/>
-            <loader id="productsDl">
+        <collection id="ordersDc"
+                    class="org.lightspeedsnail.entity.Order">
+            <fetchPlan extends="_base">
+                <property name="client" fetchPlan="_base">
+                    <property name="address" fetchPlan="_base"/>
+                    <property name="clientContact" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="ordersDl">
                 <query>
-                    <![CDATA[select e from Product e order by e.name]]>
+                    <![CDATA[select e from Order_ e order by e.created]]>
                 </query>
             </loader>
         </collection>
@@ -30,30 +35,33 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="productsTable" spacing="true">
+    <layout expand="ordersTable" spacing="true">
         <filter id="filter"
-                dataLoader="productsDl">
+                dataLoader="ordersDl">
             <properties include=".*"/>
         </filter>
-        <dataGrid id="productsTable"
+        <dataGrid id="ordersTable"
                   width="100%"
-                  dataContainer="productsDc">
+                  dataContainer="ordersDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="markToDelete" type="markToDelete"/>
             </actions>
             <columns>
-                <column property="name" id="name"/>
-                <column property="weight" id="weight"/>
+                <column property="status" id="status"/>
+                <column property="created" id="created"/>
+                <column property="client" id="client"/>
+                <column property="distance" id="distance"/>
+                <column property="address" id="address"/>
                 <column property="number" id="number"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="productsTable.create"/>
-                <button id="editBtn" action="productsTable.edit"/>
-                <button id="productsTableMarkToDeleteBtn" icon="REMOVE_ACTION" stylename="danger" action="productsTable.markToDelete"/>
+                <button id="createBtn" action="ordersTable.create"/>
+                <button id="editBtn" action="ordersTable.edit"/>
+                <button id="ordersTableMarkToDeleteBtn" action="ordersTable.markToDelete"  icon="REMOVE_ACTION" stylename="danger"/>
             </buttonsPanel>
         </dataGrid>
         <hbox id="lookupActions" spacing="true" visible="false">

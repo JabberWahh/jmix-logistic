@@ -7,6 +7,7 @@
         <item screen="Client.browse" caption="msg://org.lightspeedsnail.screen.client/clientBrowse.menu"/>
         <item screen="Shipment.browse" caption="msg://org.lightspeedsnail.screen.shipment/shipmentBrowse.menu"/>
         <item screen="Product.browse" caption="msg://org.lightspeedsnail.screen.product/productBrowse.menu"/>
+        <item screen="Order_.browse" caption="msg://org.lightspeedsnail.screen.order/orderBrowse.menu"/>
     </menu>
 
 </menu-config>
